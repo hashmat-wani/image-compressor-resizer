@@ -1,0 +1,180 @@
+/* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #927dfc;
+}
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+}
+.container h3 {
+  /* border: 1px solid red; */
+  color: white;
+  margin-bottom: 20px;
+}
+
+.wrapper {
+  width: 450px;
+  height: 288px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 9px;
+  transition: height 0.2s ease;
+  /* border: 1px solid red; */
+}
+.wrapper.active {
+  height: 537px;
+}
+
+.wrapper .upload-box {
+  height: 225px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 2px dashed #afafaf;
+}
+.wrapper.active .upload-box {
+  border: none;
+}
+.upload-box p {
+  font-size: 1.06rem;
+  margin-top: 20px;
+}
+
+.wrapper.active .upload-box p {
+  display: none;
+}
+
+.wrapper.active .upload-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.wrapper .content {
+  opacity: 0;
+  margin-top: 28px;
+  pointer-events: none;
+}
+.wrapper.active .content {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.5s 0.05s ease;
+}
+.content .row {
+  display: flex;
+  justify-content: space-between;
+}
+.content .row .column {
+  /* border: 1px solid blue; */
+  width: calc(100% / 2 - 15px);
+}
+.row .column label {
+  font-size: 1.06rem;
+}
+
+.sizes .column input {
+  width: 100%;
+  height: 49px;
+  outline: none;
+  margin-top: 7px;
+  padding: 0 15px;
+  font-size: 1.06rem;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+}
+.sizes .column input:focus {
+  padding: 0 14px;
+  border: 2px solid #927dfc;
+}
+.content .checkboxes {
+  margin-top: 20px;
+}
+
+.checkboxes .column {
+  display: flex;
+  align-items: center;
+}
+.checkboxes .column input {
+  width: 17px;
+  height: 17px;
+  margin-right: 9px;
+  accent-color: #927dfc;
+}
+.content .download-btn {
+  width: 100%;
+  color: #fff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.06rem;
+  border-radius: 5px;
+  padding: 15px 0;
+  /* margin: 30px 0 10px; */
+  margin-top: 30px;
+  background: #927dfc;
+  text-transform: uppercase;
+}
+
+.footer {
+  width: 450px;
+}
+
+.footer_top {
+  width: 100%;
+  color: #43affc;
+  color: white;
+  border-top: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  column-gap: 15px;
+  margin-top: 30px;
+  padding: 20px 0;
+}
+
+.fa:hover {
+  transform: scale(0.9, 0.9);
+}
+.fa {
+  color: #43affc;
+  color: white;
+  padding-top: 4px;
+  cursor: pointer;
+}
+.footer_bottom {
+  text-align: center;
+  border-top: 1px solid white;
+  font-size: small;
+  color: whitesmoke;
+  margin: 0 70px;
+  padding-top: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .footer {
+    width: 100%;
+  }
+  .wrapper {
+    width: 100%;
+    /* min-height: 100vh; */
+  }
+  .wrapper.active {
+    height: 557px;
+  }
+}
