@@ -3,7 +3,9 @@ In this Image Resizer & Compressor tool, users can upload an image and resize it
 If the “Reduce quality” is checked, the image quality will be reduced by 40%. And, finally users can download their resized images by clicking on the “Download Image” button.
 
 Before Image Upload:
-![Search Page Image](./readme%20Images/beforeUpload.png)
+
+![Before Image Upload](./readme%20Images/beforeUpload.png)
 
 After Image Upload:
-![Weather Page Image](./readme%20Images/afterUpload.png)
+
+![After Image Upload](./readme%20Images/afterUpload.png)
