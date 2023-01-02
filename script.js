@@ -72,7 +72,6 @@ downloadBtn.addEventListener("click", () => {
 });
 
 function changePixels() {
-  console.log("changepixel");
   newPixels.textContent = `${widthInput.value} x ${heightInput.value} pixels`;
 
   canvas = document.createElement("canvas");
@@ -117,7 +116,6 @@ fileType.addEventListener("change", (e) => {
 });
 
 async function changeQualityRange(e) {
-  console.log("woring");
   let value = e?.target.value || quality_range.value;
   quality_value.textContent = `Quality: ${value}% (${
     value > 79 ? "High" : value > 49 ? "Medium" : "Low"
@@ -141,7 +139,6 @@ function changeImageType() {
   changeQualityRange();
   fileType.value = mimeType;
   newFileType.textContent = `.${mimeType}`;
-  changePixels();
 }
 
 removeIcon.addEventListener("click", (e) => {
