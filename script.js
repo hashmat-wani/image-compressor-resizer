@@ -124,10 +124,12 @@ function changeImageType() {
   if (mimeType === "png") {
     quality_range.value = 100;
     quality_range.disabled = true;
+    quality_value.style.color = "#afafaf";
     helperText.style.display = "block";
   } else {
     quality_range.value = 80;
     quality_range.disabled = false;
+    quality_value.style.color = "black";
     helperText.style.display = "none";
   }
   changeQualityRange();

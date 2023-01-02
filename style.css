@@ -50,7 +50,8 @@ body {
 .wrapper .upload-box span {
   display: none;
   /* border: 1px solid red; */
-  color: #927dfc;
+  font-weight: bolder;
+  color: black;
   padding: 8px;
   position: absolute;
   top: 5px;
@@ -232,11 +233,15 @@ body {
   .footer {
     width: 100%;
   }
+  .container {
+    padding: 15px;
+  }
   .wrapper {
     width: 100%;
+    padding: 15px;
   }
   .row .details {
-    column-gap: 5px;
+    column-gap: 10px;
   }
 }
 
