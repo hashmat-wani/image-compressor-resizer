@@ -1,6 +1,7 @@
 const uploadBox = document.querySelector(".upload-box"),
   fileInput = uploadBox.querySelector("input"),
-  previewImg = uploadBox.querySelector("img"),
+  previewImg = uploadBox.querySelector(".preview"),
+  logo = uploadBox.querySelector(".logo"),
   widthInput = document.querySelector(".width input"),
   heightInput = document.querySelector(".height input"),
   ratioInput = document.querySelector(".ratio input"),
@@ -28,6 +29,7 @@ fileInput.addEventListener("change", (e) => {
   previewImg.src = URL.createObjectURL(file); // passing selected file url to preview img src
 
   previewImg.addEventListener("load", () => {
+    logo.style.display = "none";
     currentSize.textContent = readableBytes(file.size);
     currentPixels.textContent = `${previewImg.naturalWidth} x ${previewImg.naturalHeight} pixels`;
     mimeType = file.type.split("/")[1] === "jpeg" ? "jpg" : "png";
@@ -91,10 +93,10 @@ function changePixels() {
   downloadBtn.style.background = "#afafaf";
   canvas.toBlob(
     (blob) => {
-      newSize.textContent = readableBytes(blob.size);
       newSize.classList.remove("loader");
       downloadBtn.textContent = "Download";
       downloadBtn.style.background = "#927dfc";
+      newSize.textContent = readableBytes(blob.size);
     },
     `image/${mimeType === "jpg" ? "jpeg" : mimeType}`,
     imgQuality
@@ -143,7 +145,8 @@ function changeImageType() {
 
 removeIcon.addEventListener("click", (e) => {
   document.querySelector(".wrapper").classList.remove("active");
-  previewImg.src = "https://i.ibb.co/b17cNXv/upload-icon.png";
+  previewImg.src = null;
+  logo.style.display = "block";
   e.stopPropagation();
 });
 
