@@ -51,11 +51,14 @@ body {
   display: none;
   /* border: 1px solid red; */
   font-weight: bolder;
-  color: black;
-  padding: 8px;
+  color: white;
+  padding: 4px;
   position: absolute;
   top: 5px;
   right: 5px;
+  font-size: 18px;
+  border-radius: 50%;
+  background-color: #afafaf;
 }
 
 .wrapper.active .upload-box span {
