@@ -23,7 +23,6 @@ let canvas, imgQuality, ogImageRatio, mimeType;
 uploadBox.addEventListener("click", () => fileInput.click());
 
 fileInput.addEventListener("change", (e) => {
-  console.log("rendered");
   const file = e.target.files[0]; // getting first user selected file
   if (!file) return; // return if user hasn't selected any file
   previewImg.src = URL.createObjectURL(file); // passing selected file url to preview img src
@@ -48,7 +47,7 @@ widthInput.addEventListener("input", () => {
     ? widthInput.value / ogImageRatio
     : heightInput.value;
   heightInput.value = Math.floor(height);
-  changePixels();
+  debounce(changePixels);
 });
 
 heightInput.addEventListener("input", () => {
@@ -57,7 +56,7 @@ heightInput.addEventListener("input", () => {
     ? heightInput.value * ogImageRatio
     : widthInput.value;
   widthInput.value = Math.floor(width);
-  changePixels();
+  debounce(changePixels);
 });
 
 downloadBtn.addEventListener("click", () => {
@@ -73,6 +72,7 @@ downloadBtn.addEventListener("click", () => {
 });
 
 function changePixels() {
+  console.log("changepixel");
   newPixels.textContent = `${widthInput.value} x ${heightInput.value} pixels`;
 
   canvas = document.createElement("canvas");
@@ -86,11 +86,16 @@ function changePixels() {
 
   // drawing user selected image onto the canvas
   ctx.drawImage(previewImg, 0, 0, canvas.width, canvas.height);
-
+  newSize.textContent = "";
+  newSize.classList.add("loader");
+  downloadBtn.textContent = "Calculating...";
+  downloadBtn.style.background = "#afafaf";
   canvas.toBlob(
     (blob) => {
-      console.log((blob.size / 1024).toFixed(1));
       newSize.textContent = readableBytes(blob.size);
+      newSize.classList.remove("loader");
+      downloadBtn.textContent = "Download";
+      downloadBtn.style.background = "#927dfc";
     },
     `image/${mimeType === "jpg" ? "jpeg" : mimeType}`,
     imgQuality
@@ -111,13 +116,14 @@ fileType.addEventListener("change", (e) => {
   changeImageType();
 });
 
-function changeQualityRange(e) {
+async function changeQualityRange(e) {
+  console.log("woring");
   let value = e?.target.value || quality_range.value;
-  quality_value.textContent = `Quality: ${value || 100}% (${
+  quality_value.textContent = `Quality: ${value}% (${
     value > 79 ? "High" : value > 49 ? "Medium" : "Low"
   })`;
   imgQuality = value / 100;
-  changePixels();
+  debounce(changePixels);
 }
 
 function changeImageType() {
@@ -143,3 +149,9 @@ removeIcon.addEventListener("click", (e) => {
   previewImg.src = "https://i.ibb.co/b17cNXv/upload-icon.png";
   e.stopPropagation();
 });
+
+let debounceId;
+function debounce(cb) {
+  debounceId && clearTimeout(debounceId);
+  debounceId = setTimeout(cb, 500);
+}

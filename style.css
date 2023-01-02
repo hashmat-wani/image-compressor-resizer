@@ -193,6 +193,7 @@ body {
 .content .download-btn {
   width: 100%;
   color: #fff;
+  /* color: black; */
   outline: none;
   border: none;
   cursor: pointer;
@@ -201,7 +202,7 @@ body {
   padding: 15px 0;
   margin-top: 30px;
   background: #927dfc;
-  text-transform: uppercase;
+  /* background-color: red; */
 }
 
 .footer {
@@ -256,4 +257,33 @@ body {
 input[type="range"] {
   cursor: pointer;
   width: 95%;
+}
+
+.loader {
+  border: 2px solid #927dfc;
+  border-radius: 50%;
+  border-top: 1px solid white;
+  width: 17px;
+  height: 17px;
+  -webkit-animation: spin 0.5s linear infinite; /* Safari */
+  animation: spin 0.5s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
