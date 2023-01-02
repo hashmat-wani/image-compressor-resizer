@@ -17,6 +17,7 @@ body {
   justify-content: center;
   flex-direction: column;
   padding: 20px;
+  /* font-size: 30px; */
 }
 .container h3 {
   /* border: 1px solid red; */
@@ -26,19 +27,17 @@ body {
 
 .wrapper {
   width: 450px;
-  height: 288px;
+  /* height: 288px; */
   padding: 30px;
-  background: #fff;
+  background: whitesmoke;
   border-radius: 9px;
   transition: height 0.2s ease;
   /* border: 1px solid red; */
 }
-.wrapper.active {
-  height: 537px;
-}
 
 .wrapper .upload-box {
-  height: 225px;
+  /* background-color: red; */
+  min-height: 225px;
   display: flex;
   cursor: pointer;
   align-items: center;
@@ -46,9 +45,24 @@ body {
   flex-direction: column;
   border-radius: 5px;
   border: 2px dashed #afafaf;
+  position: relative;
+}
+.wrapper .upload-box span {
+  display: none;
+  /* border: 1px solid red; */
+  color: #927dfc;
+  padding: 8px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.wrapper.active .upload-box span {
+  display: block;
 }
 .wrapper.active .upload-box {
   border: none;
+  min-height: 150px;
 }
 .upload-box p {
   font-size: 1.06rem;
@@ -60,60 +74,111 @@ body {
 }
 
 .wrapper.active .upload-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   border-radius: 5px;
 }
 
 .wrapper .content {
-  opacity: 0;
+  display: none;
+  /* opacity: 0; */
   margin-top: 28px;
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 .wrapper.active .content {
-  opacity: 1;
+  display: block;
+  /* opacity: 1;
   pointer-events: auto;
-  transition: opacity 0.5s 0.05s ease;
+  transition: opacity 0.5s 0.05s ease; */
 }
 .content .row {
+  /* border: 1px solid red; */
   display: flex;
   justify-content: space-between;
+  column-gap: 15px;
 }
 .content .row .column {
-  /* border: 1px solid blue; */
-  width: calc(100% / 2 - 15px);
+  font-size: 13px;
+  /* width: calc(100% / 2 - 15px); */
 }
-.row .column label {
-  font-size: 1.06rem;
+
+.row .details {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: space-between;
+  column-gap: 15px;
+}
+
+.content .current {
+  margin-bottom: 6px;
 }
 
 .sizes .column input {
   width: 100%;
-  height: 49px;
+  height: 40px;
   outline: none;
-  margin-top: 7px;
-  padding: 0 15px;
-  font-size: 1.06rem;
+  margin-top: 5px;
+  padding: 0 10px;
+  background-color: white;
   border-radius: 4px;
-  border: 1px solid #aaa;
+  border: none;
+  /* border: 1px solid #aaa; */
 }
 .sizes .column input:focus {
   padding: 0 14px;
-  border: 2px solid #927dfc;
-}
-.content .checkboxes {
-  margin-top: 20px;
+  border-bottom: 2px solid #927dfc;
 }
 
-.checkboxes .column {
+.range {
+  margin-top: 15px;
+}
+.range .quality {
+  flex: 2;
+  margin-top: 2px;
+}
+
+.range .quality input {
+  margin-top: 5px;
+}
+
+.range .quality .helperText {
+  color: red;
+  display: none;
+}
+
+.range .file_type {
+  flex: 1;
+}
+
+.range .file_type select {
+  width: 100%;
+  border: none;
+  background: white;
+  height: 32px;
+  margin-top: 5px;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  padding: 0 8px;
+}
+
+.range .file_type select:focus {
+  padding: 0px 7px;
+  border-bottom: 2px solid #927dfc;
+}
+
+.ratio {
   display: flex;
   align-items: center;
+  font-size: 13px;
+  margin-top: 5px;
+  /* border: 1px solid red; */
 }
-.checkboxes .column input {
-  width: 17px;
-  height: 17px;
-  margin-right: 9px;
+.ratio input {
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
   accent-color: #927dfc;
 }
 .content .download-btn {
@@ -125,7 +190,6 @@ body {
   font-size: 1.06rem;
   border-radius: 5px;
   padding: 15px 0;
-  /* margin: 30px 0 10px; */
   margin-top: 30px;
   background: #927dfc;
   text-transform: uppercase;
@@ -137,7 +201,6 @@ body {
 
 .footer_top {
   width: 100%;
-  color: #43affc;
   color: white;
   border-top: 1px solid white;
   display: flex;
@@ -152,7 +215,6 @@ body {
   transform: scale(0.9, 0.9);
 }
 .fa {
-  color: #43affc;
   color: white;
   padding-top: 4px;
   cursor: pointer;
@@ -172,9 +234,13 @@ body {
   }
   .wrapper {
     width: 100%;
-    /* min-height: 100vh; */
   }
-  .wrapper.active {
-    height: 557px;
+  .row .details {
+    column-gap: 5px;
   }
+}
+
+input[type="range"] {
+  cursor: pointer;
+  width: 95%;
 }
