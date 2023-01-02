@@ -43,21 +43,40 @@ fileInput.addEventListener("change", (e) => {
   });
 });
 
-widthInput.addEventListener("input", () => {
+widthInput.addEventListener("input", (e) => {
+  console.log("width");
+  // if (!e.target.value.length || (!heightInput.value && !ratioInput.checked)) {
+  //   validation();
+  //   return;
+  // }
+  // removeValidation();
   // getting height according to the ratio checkbox status
   const height = ratioInput.checked
     ? widthInput.value / ogImageRatio
     : heightInput.value;
   heightInput.value = Math.floor(height);
+  // changePixels();
   debounce(changePixels);
 });
 
-heightInput.addEventListener("input", () => {
+heightInput.addEventListener("input", (e) => {
+  // if (
+  //   !e.target.value.length ||
+  //   (widthInput.value == 0 && !ratioInput.checked)
+  // ) {
+  //   validation();
+  //   return;
+  // }
   // getting width according to the ratio checkbox status
   const width = ratioInput.checked
     ? heightInput.value * ogImageRatio
     : widthInput.value;
   widthInput.value = Math.floor(width);
+
+  // console.log(typeof widthInput.value);
+  // console.log(e.target.value.length);
+
+  // removeValidation();
   debounce(changePixels);
 });
 
@@ -74,33 +93,38 @@ downloadBtn.addEventListener("click", () => {
 });
 
 function changePixels() {
-  newPixels.textContent = `${widthInput.value} x ${heightInput.value} pixels`;
+  if (!Number(widthInput.value) || !Number(heightInput.value)) {
+    validation();
+  } else {
+    removeValidation();
+    newPixels.textContent = `${widthInput.value} x ${heightInput.value} pixels`;
 
-  canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
+    canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
 
-  // if quality checkbox is checked, pass 0.5 to imgQuality else pass 1.0
-  // 1.0 is 100% quality where 0.5 is 50% of total. you can pass from 0.1 - 1.0
-  // setting canvas height & width according to the input values
-  canvas.width = widthInput.value;
-  canvas.height = heightInput.value;
+    // if quality checkbox is checked, pass 0.5 to imgQuality else pass 1.0
+    // 1.0 is 100% quality where 0.5 is 50% of total. you can pass from 0.1 - 1.0
+    // setting canvas height & width according to the input values
+    canvas.width = widthInput.value;
+    canvas.height = heightInput.value;
 
-  // drawing user selected image onto the canvas
-  ctx.drawImage(previewImg, 0, 0, canvas.width, canvas.height);
-  newSize.textContent = "";
-  newSize.classList.add("loader");
-  downloadBtn.textContent = "Calculating...";
-  downloadBtn.style.background = "#afafaf";
-  canvas.toBlob(
-    (blob) => {
-      newSize.classList.remove("loader");
-      downloadBtn.textContent = "Download";
-      downloadBtn.style.background = "#927dfc";
-      newSize.textContent = readableBytes(blob.size);
-    },
-    `image/${mimeType === "jpg" ? "jpeg" : mimeType}`,
-    imgQuality
-  );
+    // drawing user selected image onto the canvas
+    ctx.drawImage(previewImg, 0, 0, canvas.width, canvas.height);
+    newSize.textContent = "";
+    newSize.classList.add("loader");
+    downloadBtn.textContent = "Calculating...";
+    downloadBtn.style.background = "#afafaf";
+    canvas.toBlob(
+      (blob) => {
+        newSize.classList.remove("loader");
+        downloadBtn.textContent = "Download";
+        downloadBtn.style.background = "#927dfc";
+        newSize.textContent = readableBytes(blob?.size);
+      },
+      `image/${mimeType === "jpg" ? "jpeg" : mimeType}`,
+      imgQuality
+    );
+  }
 }
 
 function readableBytes(bytes) {
@@ -154,4 +178,12 @@ let debounceId;
 function debounce(cb) {
   debounceId && clearTimeout(debounceId);
   debounceId = setTimeout(cb, 500);
+}
+
+function validation() {
+  document.querySelector(".validation").style.display = "block";
+}
+
+function removeValidation() {
+  document.querySelector(".validation").style.display = "none";
 }
