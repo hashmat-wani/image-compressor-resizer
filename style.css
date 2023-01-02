@@ -133,14 +133,19 @@ body {
 
 .range {
   margin-top: 15px;
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
 }
 .range .quality {
   flex: 2;
-  margin-top: 2px;
 }
 
 .range .quality input {
-  margin-top: 5px;
+  margin-top: 3px;
+}
+#quality_value {
+  font-size: 12px;
 }
 
 .range .quality .helperText {
