@@ -73,7 +73,6 @@ downloadBtn.addEventListener("click", () => {
 });
 
 function changePixels() {
-  console.log(widthInput.value.length);
   if (
     !Number(widthInput.value) ||
     !Number(heightInput.value) ||
@@ -100,11 +99,17 @@ function changePixels() {
     newSize.classList.add("loader");
     downloadBtn.textContent = "Calculating...";
     downloadBtn.style.background = "#afafaf";
+    downloadBtn.disabled = true;
+    downloadBtn.style.cursor = "none";
+
     canvas.toBlob(
       (blob) => {
         newSize.classList.remove("loader");
         downloadBtn.textContent = "Download";
         downloadBtn.style.background = "#927dfc";
+        downloadBtn.disabled = false;
+        downloadBtn.style.cursor = "pointer";
+
         newSize.textContent = readableBytes(blob?.size);
       },
       `image/${mimeType === "jpg" ? "jpeg" : mimeType}`,
