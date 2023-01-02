@@ -44,39 +44,19 @@ fileInput.addEventListener("change", (e) => {
 });
 
 widthInput.addEventListener("input", (e) => {
-  console.log("width");
-  // if (!e.target.value.length || (!heightInput.value && !ratioInput.checked)) {
-  //   validation();
-  //   return;
-  // }
-  // removeValidation();
-  // getting height according to the ratio checkbox status
   const height = ratioInput.checked
     ? widthInput.value / ogImageRatio
     : heightInput.value;
   heightInput.value = Math.floor(height);
-  // changePixels();
   debounce(changePixels);
 });
 
 heightInput.addEventListener("input", (e) => {
-  // if (
-  //   !e.target.value.length ||
-  //   (widthInput.value == 0 && !ratioInput.checked)
-  // ) {
-  //   validation();
-  //   return;
-  // }
-  // getting width according to the ratio checkbox status
   const width = ratioInput.checked
     ? heightInput.value * ogImageRatio
     : widthInput.value;
   widthInput.value = Math.floor(width);
 
-  // console.log(typeof widthInput.value);
-  // console.log(e.target.value.length);
-
-  // removeValidation();
   debounce(changePixels);
 });
 
@@ -93,7 +73,13 @@ downloadBtn.addEventListener("click", () => {
 });
 
 function changePixels() {
-  if (!Number(widthInput.value) || !Number(heightInput.value)) {
+  console.log(widthInput.value.length);
+  if (
+    !Number(widthInput.value) ||
+    !Number(heightInput.value) ||
+    widthInput.value.length > 4 ||
+    heightInput.value.length > 4
+  ) {
     validation();
   } else {
     removeValidation();
