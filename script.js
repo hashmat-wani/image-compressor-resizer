@@ -61,15 +61,20 @@ heightInput.addEventListener("input", (e) => {
 });
 
 downloadBtn.addEventListener("click", () => {
+  // downloadBtn.innerText = "Downloading file...";
   const a = document.createElement("a");
 
   // passing canvas data url as href value of <a> element
-  a.href = canvas.toDataURL(
+  let url = canvas.toDataURL(
     `image/${mimeType === "jpg" ? "jpeg" : mimeType}`,
     imgQuality
   );
+  a.href = url;
   a.download = new Date().getTime(); // passing current time as download value
+  // document.body.appendChild(a);
   a.click(); // clicking <a> element so the file download
+  // downloadBtn.innerText = "Download";
+  // a.remove();
 });
 
 function changePixels() {
