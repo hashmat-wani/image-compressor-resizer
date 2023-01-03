@@ -38,7 +38,7 @@ fileInput.addEventListener("change", (e) => {
     widthInput.value = previewImg.naturalWidth;
     heightInput.value = previewImg.naturalHeight;
     ogImageRatio = previewImg.naturalWidth / previewImg.naturalHeight;
-    document.querySelector(".wrapper").classList.add("active");
+    document.querySelector(".container").classList.add("active");
     changePixels();
   });
 });
@@ -164,7 +164,7 @@ function changeImageType() {
 }
 
 removeIcon.addEventListener("click", (e) => {
-  document.querySelector(".wrapper").classList.remove("active");
+  document.querySelector(".container").classList.remove("active");
   previewImg.src = null;
   logo.style.display = "block";
   e.stopPropagation();
